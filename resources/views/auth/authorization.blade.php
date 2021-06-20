@@ -14,7 +14,7 @@
 @section('content')
     <!--Основное содержимое-->
         <div class="col-md-4 mx-auto">
-            <form class="gap-2 mx-auto list-group form-inline" action="books.blade.php" method="get">
+            <form class="gap-2 mx-auto list-group form-inline" action="../books.blade.php" method="get">
                 <label class="form-label  text-center" for="login">Логин</label>
                 <input name="login" id="login" class="form-control mx-auto" maxlength="20" minlength="6"  type="text" required style="max-width: 250px">
 

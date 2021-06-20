@@ -7,12 +7,12 @@
     <div class="list-inline mb-1">
         {{-- TODO тут навигацию допилить и погуглить на счёт рациональности сего кода--}}
         <a class="btn btn-outline-secondary
-        <?php if (Route::getCurrentRoute()->uri == 'main') echo 'active';?>
+        <?php if (Route::getCurrentRoute()->uri == '/') echo 'active';?>
             me-1 mt-1" href="{{route('main')}}">Главная</a>
 
         <a class="btn btn-outline-secondary
-        <?php if (Route::getCurrentRoute()->uri == 'books') echo 'active'; ?>
-            me-1 mt-1" href="{{route('books')}}">Каталог</a>
+        <?php if (Route::getCurrentRoute()->uri == 'book') echo 'active'; ?>
+            me-1 mt-1" href="{{route('book.index')}}">Каталог</a>
 
         <a class="btn btn-outline-secondary
         <?php if (Route::getCurrentRoute()->uri == 'shelves') echo 'active'; ?>

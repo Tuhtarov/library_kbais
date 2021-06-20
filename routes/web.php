@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,29 +15,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('main');
+    return view('main.mainpage');
 })->name('main');
 
-Route::get('/book', function () {
-    return view('book');
-})->name('book');
-
-Route::get('/books', function () {
-    return view('books');
-})->name('books');
+Route::resource('book', BookController::class)->only([
+    'index', 'show'
+]);
 
 Route::get('/authorization', function () {
-    return view('authorization');
+    return view('auth.authorization');
 })->name('login');
 
 Route::get('/readers', function () {
-    return view('readers');
+    return view('reader.readers');
 })->name('readers');
 
-Route::get('/main', function () {
-    return view('mainpage');
-})->name('main');
-
 Route::get('/shelves', function () {
-    return view('shelves');
+    return view('shelves.shelves');
 })->name('shelves');
