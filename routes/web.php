@@ -1,35 +1,25 @@
 <?php
 
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\ReaderController;
+use App\Http\Controllers\Admin\ShelfController;
+use App\Http\Controllers\admin\TagController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', [MainController::class, 'index'])->name('main');
+Route::post('/journal/add', [MainController::class, 'add'])->name('main.journal.add');
 
-Route::get('/', function () {
-    return view('main.mainpage');
-})->name('main');
-
-Route::resource('book', BookController::class)->only([
-    'index', 'show'
-]);
 
 Route::get('/authorization', function () {
     return view('auth.authorization');
 })->name('login');
 
-Route::get('/readers', function () {
-    return view('reader.readers');
-})->name('readers');
-
-Route::get('/shelves', function () {
-    return view('shelves.shelves');
-})->name('shelves');
+Route::resources([
+    'books' => BookController::class,
+    'categories' => CategoryController::class,
+    'shelves' => ShelfController::class,
+    'readers' => ReaderController::class,
+    'tags' => TagController::class,
+]);

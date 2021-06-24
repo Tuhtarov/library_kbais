@@ -15,14 +15,14 @@ class CreateBooksTable extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('author');
-            $table->string('name');
-            $table->foreignId('category');
-            $table->foreignId('image_book_id')->nullable();
-            $table->foreignId('shelves');
-            $table->foreignId('tag')->nullable();
-            $table->foreignId('reader')->nullable();
+            $table->string('title');
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('shelve_id');
+            $table->smallInteger('pages');
+            $table->unsignedInteger('image_book_id')->nullable();
+            $table->unsignedInteger('reader')->nullable();
             $table->timestamps();
         });
     }

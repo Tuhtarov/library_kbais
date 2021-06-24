@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tags extends Model
 {
     use HasFactory;
+    protected $table = 'tags';
+    public $timestamps = false;
+    protected $guarded = ['_token'];
+    protected $attributes = ['slug' => 'newslug'];
 }

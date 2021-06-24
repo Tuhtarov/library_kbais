@@ -13,7 +13,7 @@
 
 @section('header')
     {{-- TODO условным оператором провернуть переключение между шапками не/авторизирующегося человека --}}
-    @include('layouts.components.header_non_auth')
+    @include('layouts.components.app.header_successful_auth')
 @show
 
     <!--Основное содержимое-->
@@ -27,7 +27,7 @@
 </div>
 
 @section('footer')
-    @include('layouts.components.footer')
+    @include('layouts.components.app.footer')
 @show
 </body>
 </html>

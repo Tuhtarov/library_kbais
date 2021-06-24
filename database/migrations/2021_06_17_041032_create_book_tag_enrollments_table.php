@@ -14,9 +14,9 @@ class CreateBookTagEnrollmentsTable extends Migration
     public function up()
     {
         Schema::create('book_tag_enrollments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('book_id');
-            $table->foreignId('tag_id');
+            $table->increments('id');
+            $table->unsignedInteger('book_id');
+            $table->unsignedInteger('tag_id');
         });
     }
 
