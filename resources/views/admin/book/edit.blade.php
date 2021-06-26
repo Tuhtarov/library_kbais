@@ -21,24 +21,43 @@
                 <div class="mb-3">
                     <label for="author" class="form-label">Автор книги</label>
                     <input required type="text" placeholder="пример: Михаил Булгаков, А.С Пушкин, Байер Майк"
-                           class="form-control" value="{{$book->author}}" id="author" name="book[author]"  maxlength="30">
+                           class="form-control" value="{{$book->author}}" id="author" name="book[author]"
+                           maxlength="30">
                 </div>
-                <div class="mb-3" style="max-width: 200px">
-                    <label for="pages" class="form-label">Количество страниц</label>
-                    <input required type="number" placeholder="30-2500" class="form-control" min="30" max="2500"
-                           id="pages" value="{{$book->pages}}" name="book[pages]">
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <div style="max-width: 200px">
+                            <label for="pages" class="form-label">Количество страниц</label>
+                            <input required type="number" placeholder="30-2500" class="form-control" min="30" max="2500"
+                                   id="pages" value="{{$book->pages}}" name="book[pages]">
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="category" class="form-label">Полка</label>
+                        <select class="form-select" aria-label="Default select example" oninput="this"
+                                name="book[category_id]">
+                            <option value="{{isset($book->shelve) ? $book->shelve->id : 0}}" selected>
+                                Текущая полка: {{isset($book->shelve) ? $book->shelve->title : 'отсутствует'}}
+                            </option>
+                            @foreach($shelves as $shelve)
+                                <option value="{{$shelve->id}}">{{$shelve->title}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="category" class="form-label">Категория</label>
-                        <select class="form-select" aria-label="Default select example" oninput="this" name="book[category_id]">
-                            <option value="{{$book->category->id}}" selected>{{$book->category->title}}</option>
+                        <select class="form-select" aria-label="Default select example" oninput="this"
+                                name="book[category_id]">
+                            <option value="{{isset($book->category) ? $book->category->id : 0}}" selected>
+                                Текущая категория: {{isset($book->category) ? $book->category->title : 'отсутствует'}}
+                            </option>
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->title}}</option>
                             @endforeach
                         </select>
                         <a class="ms-2 mt-2 text-decoration-none" href="#"><small>Создать категорию</small></a>
-
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="tags" class="form-label">Теги</label>

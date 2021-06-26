@@ -20,16 +20,24 @@
                     <tr class="{{$record->returned == true ? 'table-success' : 'table-danger'}}">
                         <th scope="row">{{$record->id}}</th>
                         <td>
+                            @if(isset($record->book))
                             <a class="btn btn-link text-decoration-none ps-0 link-dark"
                                href="{{route('books.show',['book' => $record->book->id])}}">
                                 {{$record->book->title}} - {{$record->book->author}}
                             </a>
+                            @else
+                                <a class="btn btn-link text-decoration-none ps-0 text-danger disabled">Книга удалена</a>
+                            @endif
                         </td>
                         <td>
-                            <a class="btn btn-link text-decoration-none ps-0 link-dark"
-                               href="{{route('readers.show',['reader' => $record->reader->id])}}">
-                                {{$record->reader->getFullName()}}
-                            </a>
+                            @if(isset($record->reader))
+                                <a class="btn btn-link text-decoration-none ps-0 link-dark"
+                                   href="{{route('readers.show',['reader' => $record->reader->id])}}">
+                                    {{$record->reader->getFullName()}}
+                                </a>
+                            @else
+                                <a class="btn btn-link text-decoration-none ps-0 text-danger disabled">Читатель удалён</a>
+                            @endif
                         </td>
                         <td>{{$record->added_at}}</td>
                         <td>{{$record->when_return}}</td>

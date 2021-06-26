@@ -20,9 +20,9 @@
                     <h4 class="card-text">{{$book->title}}</h4>
                     <hr>
                     <div class="list-group-flush">
-                        <p class="fs-5 list-group-item-action bg-transparent border-0">Категория: {{$book->category->title}}</p>
+                        <p class="fs-5 list-group-item-action bg-transparent border-0">Категория: {{isset($book->category) ? "{$book->category->title}" : 'отсутствует'}}</p>
                         <p class="fs-5 list-group-item-action bg-transparent border-0">Страницы: {{$book->pages}}</p>
-                        <p class="fs-5 list-group-item-action bg-transparent border-0">Полка: {{$book->shelve->title}}</p>
+                        <p class="fs-5 list-group-item-action bg-transparent border-0">Полка: {{isset($book->shelve) ? "{$book->shelve->title}" : 'отсутствует'}}</p>
                         @if($book->reader === null)
                         <p class="fs-5 list-group-item-action bg-transparent border-0 text-success">Книга доступна</p>
                         @else

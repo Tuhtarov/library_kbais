@@ -20,16 +20,6 @@ class CreateJournalsTable extends Migration
             $table->timestamp('added_at');
             $table->date('when_return');
             $table->boolean('returned')->default(0);
-
-            $table->foreign('reader_id')
-                ->references('id')
-                ->on('readers')
-                ->onDelete('set null');
-
-            $table->foreign('book_id')
-                ->references('id')
-                ->on('books')
-                ->onDelete('set null');
         });
     }
 
