@@ -25,4 +25,8 @@ class Book extends Model
         return $this->belongsTo(Shelves::class);
     }
 
+    public function journal() {
+        return $this->hasMany(Journal::class, 'book_id', 'id');
+    }
+
 }

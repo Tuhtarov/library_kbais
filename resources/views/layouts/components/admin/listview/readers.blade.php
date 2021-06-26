@@ -9,13 +9,15 @@
                    style="max-width: 410px;">
             <button class="btn btn-outline-success" type="submit">Найти</button>
         </form>
+        <a class="btn ps-0  link-success text-decoration-none btn-link"
+           href="{{route('readers.create')}}">Зарегистрировать читателя</a>
     </section>
 
     <section class="mx-start my-auto mt-3 col-md-8 mb-5">
         <div class="list-group">
             <div class="accordion accordion-flush" id="accordionExample">
-                @if(count($listOfReaders))
-                @foreach($listOfReaders as $reader)
+                @if(count($readers))
+                @foreach($readers as $reader)
                 <div class="accordion-item mt-1  border-bottom border-end border-2 bg-light">
                     <h2 class="accordion-header" id="heading{{$reader->id}}">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"

@@ -56,3 +56,7 @@
         @endforeach
     </div>
 @endsection
+
+@section('footer')
+    {{ $books->links()  }}
+@endsection

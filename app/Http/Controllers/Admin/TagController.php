@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Tags;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
@@ -15,7 +16,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tags::all();
+        $tags = Tags::paginate(10);
         return view('admin.tag.index', ['tags' => $tags]);
     }
 
@@ -37,13 +38,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $newTag = Tags::create($request->tag);
-            $newTag->save();
-            return redirect()->route('tags.index')->with('success', 'Тег успешно создан');
-        } catch (\Exception $e) {
-            return redirect()->route('tags.index')->with('error', 'Ошибка создание нового тега ' . $e->getMessage());
-        }
+        Tags::create($request->tag);
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -68,8 +64,11 @@ class TagController extends Controller
     public function update(Request $request, $id)
     {
         $tag = Tags::findOrFail($id);
-        $tag->update($request->tag);
-        return redirect()->route('tags.index')->with('success', 'Тег успешно отредактирован.');
+        $tag->update([
+            'title' => $request->tag['title'],
+            'slug' => Str::slug($request->tag['slug'])
+        ]);
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -82,6 +81,6 @@ class TagController extends Controller
     {
         $tag = Tags::findOrFail($id);
         $tag->delete();
-        return redirect()->route('tags.index')->with('success', 'Тег успешно удален.');
+        return redirect()->route('tags.index');
     }
 }

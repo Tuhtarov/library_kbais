@@ -12,8 +12,14 @@
             </div>
             <div class="container-fluid col-md-8 col-sm-12">
                 @include('layouts.components.admin.form.journal.add_record')
+            </div>
+            <div class="container-fluid col-md-12 mb-3">
                 @include('layouts.components.admin.listview.reading')
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    {{$journal->links()}}
 @endsection

@@ -15,7 +15,7 @@ class ShelfController extends Controller
      */
     public function index()
     {
-        $shelves = Shelves::all();
+        $shelves = Shelves::paginate(10);
         return view('admin.shelf.index', ['shelves' => $shelves]);
     }
 
@@ -37,9 +37,8 @@ class ShelfController extends Controller
      */
     public function store(Request $request)
     {
-        $newShelve = Shelves::create($request->all());
-        $newShelve->save();
-        return redirect()->route('shelves.index')->with('success', 'Полка успешно добавлена!');
+        Shelves::create($request->all());
+        return redirect()->route('shelves.index');
     }
 
     /**
@@ -76,7 +75,7 @@ class ShelfController extends Controller
     {
         $shelve = Shelves::findOrFail($id);
         $shelve->update($request->shelf);
-        return redirect()->route('shelves.index')->with('success', 'Редактирование полки прошло успешно!');
+        return redirect()->route('shelves.index');
     }
 
     /**
@@ -89,6 +88,6 @@ class ShelfController extends Controller
     {
         $shelve = Shelves::findOrFail($id);
         $shelve->delete();
-        return redirect()->route('shelves.index')->with('success', 'Полка успешно удалена!');
+        return redirect()->route('shelves.index');
     }
 }

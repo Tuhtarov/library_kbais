@@ -15,8 +15,8 @@ class ReaderController extends Controller
      */
     public function index()
     {
-        $listOfReaders = Reader::all();
-        return view('admin.reader.index', compact('listOfReaders'));
+        $readers = Reader::paginate(10);
+        return view('admin.reader.index', compact('readers'));
     }
 
     /**
@@ -37,9 +37,8 @@ class ReaderController extends Controller
      */
     public function store(Request $request)
     {
-        $newReader = Reader::create($request->all());
-        $newReader->save();
-        return redirect()->route('readers.index')->with('success', 'Читатель успешно зарегистрирован!');
+        Reader::create($request->all());
+        return redirect()->route('readers.index');
     }
 
     /**
@@ -50,7 +49,8 @@ class ReaderController extends Controller
      */
     public function show($id)
     {
-        //
+        $reader = Reader::findOrFail($id);
+        return view('admin.reader.show', ['reader' => $reader]);
     }
 
     /**
@@ -87,6 +87,6 @@ class ReaderController extends Controller
     {
         $reader = Reader::findOrFail($id);
         $reader->delete();
-        return redirect()->route('readers.index')->with('success', 'Данные читателя успешно удалены!');
+        return redirect()->route('readers.index');
     }
 }

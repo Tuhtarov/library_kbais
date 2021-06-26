@@ -13,3 +13,7 @@
         </div>
     </div>
 @endsection
+
+@section('footer')
+    {{ $categories->links()  }}
+@endsection

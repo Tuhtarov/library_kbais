@@ -16,25 +16,25 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Наименование произведения</label>
                     <input required type="text" placeholder="пример: Собачье сердце" class="form-control" id="name"
-                           name="title" maxlength="50">
+                           name="book[title]" maxlength="50">
                 </div>
                 {{--Автор--}}
                 <div class="mb-3">
                     <label for="author" class="form-label">Автор книги</label>
                     <input required type="text" placeholder="пример: Михаил Булгаков, А.С Пушкин, Байер Майк"
-                           class="form-control" id="author" name="author"  maxlength="35">
+                           class="form-control" id="author" name="book[author]"  maxlength="35">
                 </div>
                 {{--Количество страницы--}}
                 <div class="row">
                     <div class="mb-3" style="max-width: 200px">
                         <label for="pages" class="form-label">Количество страниц</label>
                         <input required type="number" placeholder="30-2500" class="form-control" min="30" max="2500"
-                               id="pages" name="pages">
+                               id="pages" name="book[pages]">
                     </div>
                     {{--Полка--}}
                     <div class="mb-3" style="max-width: 200px">
                         <label for="shelves" class="form-label">Полка</label>
-                        <select required oninput="this" name="shelve_id" id="shelves" class="form-select" aria-label="Shelves">
+                        <select required oninput="this" name="book[shelve_id]" id="shelves" class="form-select" aria-label="Shelves">
                             @foreach($shelves as $shelve)
                                 <option value="{{$shelve->id}}">{{$shelve->title}}</option>
                             @endforeach
@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="category" class="form-label">Категория</label>
-                        <select required oninput="this" name="category_id" class="form-select" aria-label="Categories">
+                        <select required oninput="this" name="book[category_id]" class="form-select" aria-label="Categories">
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->title}}</option>
                             @endforeach
@@ -58,7 +58,7 @@
                 {{--Тег--}}
                     <div class="mb-3 col-md-6">
                         <label for="tags" class="form-label">Теги</label>
-                        <select required oninput="this" name="tag_id" id="tags" class="form-select" aria-label="Tags">
+                        <select required oninput="this" name="book[tag_id]" id="tags" class="form-select" aria-label="Tags">
                             @foreach($tags as $tag)
                                 <option value="{{$tag->id}}">{{$tag->title}}</option>
                             @endforeach
@@ -71,7 +71,7 @@
                 {{--Фото--}}
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Фотография обложки книги (не обязательно)</label>
-                    <input class="form-control" type="file" id="photo" name="photo">
+                    <input class="form-control" type="file" id="photo" name="book[photo]">
                 </div>
                 <button class="btn btn-primary mt-2" type="submit">Добавить</button>
             </form>

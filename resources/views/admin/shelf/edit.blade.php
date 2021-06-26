@@ -10,11 +10,11 @@
         <div class="mb-3">
             <label for="title" class="form-label">Новое наименование полки</label>
             <input type="text" placeholder="текущее значение: {{$shelve->title}}" class="form-control" id="title"
-                   name="shelf[title]" maxlength="30" minlength="5">
+                   name="shelf[title]" value="{{$shelve->title}}" maxlength="30" minlength="5">
 
             <label for="slug" class="form-label mt-2">Новое наименование slug</label>
             <input type="text" placeholder="текущее значение: {{$shelve->slug}}" class="form-control" id="slug"
-                   name="shelf[slug]" maxlength="30"  minlength="5">
+                   name="shelf[slug]" value="{{$shelve->slug}}" maxlength="30"  minlength="5">
         </div>
         <button class="btn btn-primary mt-2" type="submit">Применить</button>
     </form>

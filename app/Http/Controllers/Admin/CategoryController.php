@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         return view('admin.category.index', ['categories' => $categories]);
     }
 
@@ -38,13 +38,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $newCategory = Category::create($request->all());
-            $newCategory->save();
-            return redirect()->route('categories.index')->with('success', 'категория успешно создана');
-        } catch (\Exception $e) {
-            return redirect()->route('categories.index')->with('error', 'ошибка создание новой категории ' . $e->getMessage());
-        }
+        Category::create($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -70,7 +65,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->update($request->category);
-        return redirect()->route('categories.index')->with('success', 'Категория успешно отредактирована.');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -83,6 +78,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Категория успешно удалена.');
+        return redirect()->route('categories.index');
     }
 }

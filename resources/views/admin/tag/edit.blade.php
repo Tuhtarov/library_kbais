@@ -9,11 +9,11 @@
         <div class="mb-3">
             <label for="title" class="form-label">Новое имя</label>
             <input value="{{$tag->title}}" type="text" placeholder="текущее значение: {{$tag->title}}"
-                   class="form-control" id="title" name="category[title]" maxlength="30" minlength="5">
+                   class="form-control" id="title" name="tag[title]" maxlength="30" minlength="5">
 
             <label for="slug" class="form-label mt-2">Новый slug для тега</label>
             <input value="{{$tag->slug}}" type="text" placeholder="текущее значение: {{$tag->slug}}"
-                   class="form-control" id="slug" name="category[slug]" maxlength="30"  minlength="5">
+                   class="form-control" id="slug" name="tag[slug]" maxlength="30"  minlength="5">
         </div>
         <button class="btn btn-primary mt-2" type="submit">Применить</button>
     </form>

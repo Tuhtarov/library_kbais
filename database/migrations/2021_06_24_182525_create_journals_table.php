@@ -19,7 +19,7 @@ class CreateJournalsTable extends Migration
             $table->unsignedInteger('book_id');
             $table->timestamp('added_at');
             $table->date('when_return');
-            $table->boolean('returned');
+            $table->boolean('returned')->default(0);;
         });
     }
 

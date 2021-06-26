@@ -18,8 +18,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $list = Book::all();
-        return view('admin.book.index', ['books' => $list]);
+        $books = Book::paginate(15);
+        return view('admin.book.index', ['books' => $books]);
     }
 
     /**
@@ -43,12 +43,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $book = Book::create($request->all());
-            $book->save();
-        } catch (\Exception $e){
-            die('при сохрании книги свершилась ошибка' . $e->getMessage());
-        }
+        Book::create($request->book);
         return redirect()->route('books.index');
     }
 
@@ -61,10 +56,7 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::query()->find($id);
-        if ($book){
-            return view('admin.book.show', compact('book'));
-        }
-        return redirect()->route('books.index');
+        return view('admin.book.show', compact('book'));
     }
 
     /**
@@ -75,9 +67,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        $bookInfo = Book::findOrFail($id);
-        $listOfCategories = Category::all();
-        return view('admin.book.edit', ['book' => $id, 'bookInfo' => $bookInfo, 'listOfCategories' => $listOfCategories]);
+        $book = Book::findOrFail($id);
+        $categories = Category::all();
+        return view('admin.book.edit', ['book' => $book, 'categories' => $categories]);
     }
 
     /**
@@ -102,7 +94,7 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::find($id);
+        $book = Book::findOrFail($id);
         $book->delete();
         return redirect()->route('books.index');
     }

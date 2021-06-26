@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    <!--TODO Форма редактирования выбранного читателя-->
+    <!--Информация о читателе-->
     <main class="container-fluid ps-5 pe-5">
         <h3 class="text-muted mb-4">Информация о читателе</h3>
         <div class="col-md-10">

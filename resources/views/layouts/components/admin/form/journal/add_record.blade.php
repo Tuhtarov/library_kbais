@@ -1,18 +1,51 @@
 <!--Добавить читателя в журнал чтения-->
 <div class="row">
-    <form class="float-start col-md-5 mt-sm-4 mt-3 mb-3 mt-md-0" method="post"
-          action="{{route('main.journal.add')}}">
+    <form class="float-start col-md-10 mt-sm-4 mt-3 mb-3 mt-md-0" method="post"
+          action="{{route('journal.add')}}">
         @csrf
-        <h3 class="text-muted mb-3">Добавить читателя</h3>
-        {{--Произведение--}}
+        <h3 class="text-muted mb-3">Добавить читателя в журнал</h3>
         <div class="mb-2">
-            <select required oninput="this" name="reader[id]" class="form-select">
-                @foreach($readers as $reader)
-                    <option value="{{$reader->id}}">{{$reader->familyname}} {{$reader->name}} {{$reader->patronymic}}</option>
-                @endforeach
-            </select>
+            <div class="row">
+                {{--Первая колонка--}}
+                <div class="col-md-6  d-grid gap-1">
+                    {{--Выбор читателя--}}
+                    <label class="form-text mb-1" for="reader">Читатель</label>
+                    <select required id="reader" oninput="this" name="reader[reader_id]" class="form-select">
+                        @foreach($readers as $reader)
+                            <option
+                                value="{{$reader->id}}">
+                                {{$reader->familyname}}
+                                {{$reader->name}}
+                                {{$reader->patronymic}}
+                            </option>
+                        @endforeach
+                    </select>
+                    {{--Выбор книги--}}
+                    <label class="form-text mb-1" for="added_at">Книга</label>
+                    <select required id="reader" oninput="this" name="reader[book_id]" class="form-select">
+                        @foreach($books as $book)
+                            <option
+                                value="{{$book->id}}">
+                                {{$book->title}} -
+                                {{$book->author}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                {{--Вторая колонка--}}
+                <div class="col-md-6 d-grid gap-1">
+                    {{--Дата начала чтения--}}
+                    <label class="form-text mb-1" for="added_at">Дата начала чтения книги</label>
+                    <input class="form-control" type="text" name="reader[added_at]" value="{{date('Y-m-d H:i:s')}}"
+                           id="added_at" readonly>
+                    {{--Дата окончания чтения--}}
+                    <label class="form-text mb-1" for="when_return">Дата возврата книги</label>
+                    <input class="form-control" type="date" name="reader[when_return]"
+                           id="when_return" required>
+                </div>
+            </div>
+            <button class="btn btn-outline-primary mt-4" type="submit">Добавить</button>
         </div>
-        <input type="text" name="{{date('Y-m-d H:i:s')}}" hidden value="dsfsdf">
-        <button class="btn btn-primary mt-2" type="submit">Добавить</button>
     </form>
 </div>
+

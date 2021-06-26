@@ -10,24 +10,27 @@
 <body>
 
 <div class="container-fluid" style="height: 85vh">
+    @section('header')
+        {{-- TODO условным оператором провернуть переключение между шапками не/авторизирующегося человека --}}
+        @include('layouts.components.app.header_successful_auth')
+    @show
 
-@section('header')
-    {{-- TODO условным оператором провернуть переключение между шапками не/авторизирующегося человека --}}
-    @include('layouts.components.app.header_successful_auth')
-@show
-
-    <!--Основное содержимое-->
     <main class="container-fluid ps-5 pe-5">
         <hr class="bi-hr mt-2 mb-4">
-    @section('content')
+        @section('content')
             {{-- Тут располагается специфичный контент для каждой вьюшки --}}
         @show
-{{-- TODO определиться с hr тегом <hr class="bi-hr mt-2 mb-2">--}}
+        {{-- TODO определиться с hr тегом <hr class="bi-hr mt-2 mb-2">--}}
     </main>
+
+    <footer class="footer container-fluid ps-5 pe-5">
+        <div class="row mx-auto col-md-12">
+         @section('footer')
+
+            @show
+        </div>
+    </footer>
 </div>
 
-@section('footer')
-    @include('layouts.components.app.footer')
-@show
 </body>
 </html>

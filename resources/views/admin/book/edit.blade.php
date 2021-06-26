@@ -9,31 +9,31 @@
                      alt="Обложка">
             </div>
             <form class="mx-auto container col-md-5 mt-sm-4 mt-3 mt-md-0" method="post"
-                  action="{{route('books.update',['book' => $bookInfo->id])}}">
+                  action="{{route('books.update',['book' => $book->id])}}">
                 @csrf
                 @method('PUT')
                 <h3 class="text-muted mb-4">Редактирование книги</h3>
                 <div class="mb-3">
                     <label for="name" class="form-label">Наименование произведения</label>
                     <input required type="text" placeholder="пример: Собачье сердце" class="form-control" id="name"
-                           name="book[title]" value="{{$bookInfo->title}}" maxlength="30">
+                           name="book[title]" value="{{$book->title}}" maxlength="30">
                 </div>
                 <div class="mb-3">
                     <label for="author" class="form-label">Автор книги</label>
                     <input required type="text" placeholder="пример: Михаил Булгаков, А.С Пушкин, Байер Майк"
-                           class="form-control" value="{{$bookInfo->author}}" id="author" name="book[author]"  maxlength="30">
+                           class="form-control" value="{{$book->author}}" id="author" name="book[author]"  maxlength="30">
                 </div>
                 <div class="mb-3" style="max-width: 200px">
                     <label for="pages" class="form-label">Количество страниц</label>
                     <input required type="number" placeholder="30-2500" class="form-control" min="30" max="2500"
-                           id="pages" value="{{$bookInfo->pages}}" name="book[pages]">
+                           id="pages" value="{{$book->pages}}" name="book[pages]">
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="category" class="form-label">Категория</label>
                         <select class="form-select" aria-label="Default select example" oninput="this" name="book[category_id]">
-                            <option value="{{$bookInfo->category->id}}" selected>{{$bookInfo->category->title}}</option>
-                            @foreach($listOfCategories as $category)
+                            <option value="{{$book->category->id}}" selected>{{$book->category->title}}</option>
+                            @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->title}}</option>
                             @endforeach
                         </select>

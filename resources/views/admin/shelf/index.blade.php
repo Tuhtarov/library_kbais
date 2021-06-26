@@ -13,3 +13,6 @@
     </div>
 @endsection
 
+@section('footer')
+    {{ $shelves->links()  }}
+@endsection

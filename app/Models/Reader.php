@@ -27,4 +27,16 @@ class Reader extends Model
             return 0;
         }
     }
+
+    public function getFullName() : string {
+        try {
+            return "{$this->familyname} " . "{$this->name} " . "{$this->patronymic}";
+        } catch (\Exception $e) {
+            return 'Неизвестная ошибка';
+        }
+    }
+
+    public function journal() {
+        return $this->hasMany(Journal::class, 'reader_id', 'id');
+    }
 }

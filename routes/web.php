@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\JournalController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ReaderController;
 use App\Http\Controllers\Admin\ShelfController;
@@ -9,7 +10,13 @@ use App\Http\Controllers\admin\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'index'])->name('main');
-Route::post('/journal/add', [MainController::class, 'add'])->name('main.journal.add');
+
+Route::name('journal.')->prefix('journal')->group(function () {
+    Route::post('/add', [JournalController::class, 'add'])->name('add');
+    Route::get('/{record}/edit', [JournalController::class, 'edit'])->name('edit')->whereNumber('record');
+    Route::post('/update/{record}', [JournalController::class, 'update'])->name('update')->whereNumber('record');
+    Route::post('/destroy/{record}', [JournalController::class, 'destroy'])->name('destroy')->whereNumber('record');
+});
 
 
 Route::get('/authorization', function () {
