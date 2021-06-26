@@ -25,7 +25,25 @@ class CreateBooksTable extends Migration
             $table->unsignedInteger('reader_id')->nullable();
             $table->timestamps();
 
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('set null');
 
+            $table->foreign('shelve_id')
+                ->references('id')
+                ->on('shelves')
+                ->onDelete('set null');
+
+            $table->foreign('reader_id')
+                ->references('id')
+                ->on('readers')
+                ->onDelete('set null');
+
+            $table->foreign('image_book_id')
+                ->references('id')
+                ->on('images')
+                ->onDelete('set null');
         });
     }
 

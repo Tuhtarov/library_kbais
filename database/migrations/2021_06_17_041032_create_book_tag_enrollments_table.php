@@ -17,6 +17,16 @@ class CreateBookTagEnrollmentsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('book_id');
             $table->unsignedInteger('tag_id');
+
+            $table->foreign('book_id')
+                ->references('id')
+                ->on('books')
+                ->onDelete('cascade');
+
+            $table->foreign('tag_id')
+                ->references('id')
+                ->on('tags')
+                ->onDelete('cascade');
         });
     }
 
