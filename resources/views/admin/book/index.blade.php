@@ -2,8 +2,10 @@
 
 
 @section('content')
+
     <h5 class="h5 text-muted mb-5 ms-1">Все книги</h5>
     <div class="row">
+
         {{--Ссылка на создание новой книги--}}
         <article class="card bg-transparent border-0"
                  style="max-width: 250px;">
@@ -31,10 +33,12 @@
                         </a>
                         @if($book->reader)
                             <span class="position-absolute top-0 start-70 translate-middle
-                            badge rounded-pill bg-info fa fa-book-reader">.</span>
+                            badge rounded-pill bg-info"><i data-tooltip="Книгу уже читают."
+                                                           class="fa text-danger fa-book-reader"></i></span>
                         @else
                             <span class="position-absolute top-0 start-70 translate-middle
-                            badge rounded-pill bg-success fa fa-check-circle">.</span>
+                            badge rounded-pill bg-success"><i data-tooltip="Доступна."
+                                                              class="fa fa-check-circle"></i></span>
                         @endif
                     </div>
 
@@ -47,7 +51,8 @@
                         <form action="{{route('books.destroy', ['book' => $book->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a class="btn btn-link link-secondary text-decoration-none" href="{{route('books.edit', ['book' => $book->id])}}">Изменить</a>
+                            <a class="btn btn-link link-secondary text-decoration-none"
+                               href="{{route('books.edit', ['book' => $book->id])}}">Изменить</a>
                             <button type="submit" class="btn btn-link text-decoration-none link-danger">Удалить</button>
                         </form>
                     </div>

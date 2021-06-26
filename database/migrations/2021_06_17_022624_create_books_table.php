@@ -18,12 +18,14 @@ class CreateBooksTable extends Migration
             $table->increments('id');
             $table->string('author');
             $table->string('title');
-            $table->unsignedInteger('category_id');
-            $table->unsignedInteger('shelve_id');
+            $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedInteger('shelve_id')->nullable();
             $table->smallInteger('pages');
             $table->unsignedInteger('image_book_id')->nullable();
-            $table->unsignedInteger('reader')->nullable();
+            $table->unsignedInteger('reader_id')->nullable();
             $table->timestamps();
+
+
         });
     }
 

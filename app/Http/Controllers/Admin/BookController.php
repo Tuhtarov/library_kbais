@@ -44,7 +44,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         Book::create($request->book);
-        return redirect()->route('books.index');
+        return redirect()->route('books.index')->with('success', 'Книга успешно создана');
     }
 
     /**
@@ -96,6 +96,6 @@ class BookController extends Controller
     {
         $book = Book::findOrFail($id);
         $book->delete();
-        return redirect()->route('books.index');
+        return redirect()->route('books.index')->with('success', "Книга '{$book->title}'" . ' успешно удалена!' );
     }
 }

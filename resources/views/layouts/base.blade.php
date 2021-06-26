@@ -17,6 +17,8 @@
 
     <main class="container-fluid ps-5 pe-5">
         <hr class="bi-hr mt-2 mb-4">
+        @include('layouts.components.app.validation.validate_message')
+
         @section('content')
             {{-- Тут располагается специфичный контент для каждой вьюшки --}}
         @show
@@ -25,7 +27,7 @@
 
     <footer class="footer container-fluid ps-5 pe-5">
         <div class="row mx-auto col-md-12">
-         @section('footer')
+            @section('footer')
 
             @show
         </div>

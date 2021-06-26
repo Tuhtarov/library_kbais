@@ -66,4 +66,17 @@ class JournalController extends Controller
         return redirect()->route('main');
     }
 
+    /**
+     * Метод принимает объект модели Journal, обновляет его св-во returned на true.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function confirmReturnBook(Journal $record)
+    {
+        $record->returned=true;
+        $record->save();
+        return redirect()->route('main');
+    }
+
 }
