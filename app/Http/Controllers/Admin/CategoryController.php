@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -64,7 +65,10 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
-        $category->update($request->category);
+        $category->update([
+            'title' => $request->category['title'],
+            'slug' => Str::slug($request->category['slug'])
+        ]);
         return redirect()->route('categories.index');
     }
 

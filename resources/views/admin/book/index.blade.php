@@ -37,7 +37,7 @@
                                                            class="fa text-danger fa-book-reader"></i></span>
                         @else
                             <span class="position-absolute top-0 start-70 translate-middle
-                            badge rounded-pill bg-success"><i data-tooltip="Доступна."
+                            badge rounded-pill bg-success"><i data-tooltip="Доступна :)"
                                                               class="fa fa-check-circle"></i></span>
                         @endif
                     </div>

@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <title>Библиотека</title>
-    @section('scripts')
-        @include('layouts.components.scripts.scripts')
-    @show
+    @include('layouts.components.scripts.scripts')
+    @yield('scripts')
 </head>
 
 <body>
@@ -33,6 +32,5 @@
         </div>
     </footer>
 </div>
-
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Shelves;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ShelfController extends Controller
 {
@@ -74,7 +75,10 @@ class ShelfController extends Controller
     public function update(Request $request, $id)
     {
         $shelve = Shelves::findOrFail($id);
-        $shelve->update($request->shelf);
+        $shelve->update([
+            'title' => $request->shelve['title'],
+            'slug' => Str::slug($request->shelve['slug'])
+        ]);
         return redirect()->route('shelves.index');
     }
 
