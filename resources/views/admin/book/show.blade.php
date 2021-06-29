@@ -1,10 +1,5 @@
 @extends('layouts.base')
 
-@section('header')
-    {{-- TODO временный хардкодинг, в будущем сделать подключение нужной шапки автоматически в base шаблоне --}}
-    @include('layouts.components.app.header_successful_auth')
-@endsection
-
 @section('content')
     <!--Форма информации о выбранной книге-->
     <main class="container-fluid ps-5 pe-5">
@@ -20,9 +15,27 @@
                     <h4 class="card-text">{{$book->title}}</h4>
                     <hr>
                     <div class="list-group-flush">
-                        <p class="fs-5 list-group-item-action bg-transparent border-0">Категория: {{isset($book->category) ? "{$book->category->title}" : 'отсутствует'}}</p>
+                        <p class="fs-5 list-group-item-action bg-transparent border-0">Категория:
+                            @if(isset($book->category))
+                                <a class="text-decoration-none link-info"
+                                   href="{{route('search.books.category.slug', ['slug' => $book->category->slug])}}">
+                                    {{$book->category->title}}
+                                </a>
+                            @else
+                                {{'отсутствует'}}
+                            @endif
+                        </p>
                         <p class="fs-5 list-group-item-action bg-transparent border-0">Страницы: {{$book->pages}}</p>
-                        <p class="fs-5 list-group-item-action bg-transparent border-0">Полка: {{isset($book->shelve) ? "{$book->shelve->title}" : 'отсутствует'}}</p>
+                        <p class="fs-5 list-group-item-action bg-transparent border-0">Полка:
+                            @if(isset($book->shelve))
+                                <a class="text-decoration-none link-info"
+                                   href="{{route('search.books.shelf.slug', ['slug' => $book->shelve->slug])}}">
+                                    {{$book->shelve->title}}
+                                </a>
+                                @else
+                                {{'отсутствует'}}
+                            @endif
+                        </p>
                         @if($book->reader === null)
                         <p class="fs-5 list-group-item-action bg-transparent border-0 text-success">Книга доступна</p>
                         @else
@@ -30,11 +43,13 @@
                         @endif
                         <p class="list-group-item-action bg-transparent border-0"><small
                                 class="text-muted">Добавлена: {{$book->created_at}}</small></p>
-                        <p class="fs-5 list-group-item-action bg-transparent border-0">Теги</p>
+                        <p class="fs-5 list-group-item-action bg-transparent border-0">Теги @if(!$book->tags->count()) отсутствуют @endif</p>
                         <div class="d-inline-flex fs-5 list-group-item-action bg-transparent border-0">
                             <div id="tags" class="list-inline">
-                                <a class="btn btn-outline-secondary me-1" href="#"><?php echo 'тег 1' ?></a>
-                                <a class="btn btn-outline-secondary me-1" href="#"><?php echo 'тег 2' ?></a>
+                                @foreach($book->tags as $tag)
+                                <a class="btn btn-outline-secondary me-1"
+                                   href="{{route('search.books.tag.slug', ['slug' => $tag->slug])}}">{{$tag->title}}</a>
+                                @endforeach
                             </div>
                         </div>
                     </div>

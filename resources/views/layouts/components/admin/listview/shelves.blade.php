@@ -10,7 +10,11 @@
     <tbody>
     @foreach($shelves as $shelve)
     <tr>
-        <th scope="row">{{$shelve->title}}</th>
+        <th scope="row">
+            <a class="text-decoration-none link-dark" href="{{route('search.books.shelf.slug', ['slug' => $shelve->slug])}}">
+                {{$shelve->title}}
+            </a>
+        </th>
         <td>{{$shelve->slug}}</td>
         <td>
             <form id="formDelete" class="d-inline" action="{{route('shelves.destroy', ['shelf' => $shelve->id])}}" method="post">

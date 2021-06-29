@@ -10,7 +10,11 @@
     <tbody>
     @foreach($tags as $tag)
         <tr>
-            <th scope="row">{{$tag->title}}</th>
+            <th scope="row">
+                <a class="text-decoration-none link-dark" href="{{route('search.books.tag.slug', ['slug' => $tag->slug])}}">
+                    {{$tag->title}}
+                </a>
+            </th>
             <td>{{$tag->slug}}</td>
             <td>
                 <form id="formDelete" class="d-inline" action="{{route('tags.destroy', [$tag->id])}}" method="post">

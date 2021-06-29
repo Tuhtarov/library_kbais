@@ -26,7 +26,6 @@ class JournalController extends Controller
      * Редактирует запись из журнала.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function edit(int $record_id)
     {

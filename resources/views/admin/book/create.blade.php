@@ -1,15 +1,7 @@
 @extends('layouts.base')
 
 @section('scripts')
-    <!-- Подключение плагина Select2 для тегов -->
-    <script src="{{asset('public/assets/js/scripts.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('public/assets/css/select2.css')}}">
-    <!-- Инициализация Select2 -->
-    <script>
-        $(function () {
-            $('.select2').select2()
-        })
-    </script>
+    @include('layouts.components.scripts.select2')
 @endsection
 
 @section('content')
@@ -79,7 +71,7 @@
                 {{--Теги--}}
                 <div class="mb-3 row">
                     <div class="form-group">
-                        <label for="tags">Теги</label>
+                        <label for="tags" class="form-label">Теги</label>
                         <select id="tags" name="tags[]" class="select2" multiple="multiple"
                                 data-placeholder="Выбрать теги" style="width: 100%;">
                             @foreach($tags as $tag)

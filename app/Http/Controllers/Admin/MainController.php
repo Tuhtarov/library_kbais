@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Journal;
 use App\Models\Reader;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class MainController extends Controller
 {
@@ -14,7 +15,8 @@ class MainController extends Controller
     {
         $readers = Reader::all();
         $books = Book::all();
-        $journal = Journal::paginate(10);
+        $journal = Journal::all()->sortByDesc('added_at');
+        $journal = new Paginator($journal, '15');
         return view('admin.main.main', ['readers' => $readers, 'books' => $books, 'journal' => $journal]);
     }
 }

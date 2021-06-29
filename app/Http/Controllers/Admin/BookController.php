@@ -43,7 +43,8 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        Book::create($request->book);
+        $book = Book::create($request->book);
+        $book->tags()->sync($request->tags);
         return redirect()->route('books.index')->with('success', 'Книга успешно создана');
     }
 
@@ -55,7 +56,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::query()->find($id);
+        $book = Book::with('tags')->where('id', '=', $id)->get()->first();
         return view('admin.book.show', compact('book'));
     }
 
@@ -67,10 +68,11 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::findOrFail($id);
+        $book = Book::with('tags')->where('id', '=', $id)->get()->first();
         $shelves = Shelves::all();
         $categories = Category::all();
-        return view('admin.book.edit', ['book' => $book, 'categories' => $categories, 'shelves' => $shelves]);
+        $tags = Tags::all();
+        return view('admin.book.edit', ['book' => $book, 'categories' => $categories, 'shelves' => $shelves, 'tags' => $tags]);
     }
 
     /**
@@ -83,6 +85,7 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         $book = Book::findOrFail($id);
+        $book->tags()->sync($request->tags);
         $book->update($request->book);
         return redirect()->route('books.index');
     }

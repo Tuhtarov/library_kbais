@@ -17,16 +17,24 @@ class Book extends Model
 
     protected $guarded = ['_token'];
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function shelve() {
+    public function shelve()
+    {
         return $this->belongsTo(Shelves::class);
     }
 
-    public function journal() {
+    public function journal()
+    {
         return $this->hasMany(Journal::class, 'book_id', 'id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class, 'book_tag_enrollments', 'book_id', 'tag_id');
     }
 
 }

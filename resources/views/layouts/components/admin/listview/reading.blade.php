@@ -47,8 +47,9 @@
                                 <form action="{{route('journal.confirm.return', ['record' => $record])}}" method="POST">
                                     @csrf
                                     <div class="nav-item">
-                                        <button class="btn btn-link nav-link fas fa-check-circle
-                                 fs-3 text-success" data-tooltip="Подтвердить возврат"></button>
+                                        <button class="btn btn-outline-success">
+                                            Подтвердить возврат
+                                        </button>
                                     </div>
                                 </form>
                             @endif

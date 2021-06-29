@@ -26,4 +26,8 @@ class Tags extends Model
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }
+
+    public function books() {
+        return $this->belongsToMany(Book::class, 'book_tag_enrollments', 'tag_id', 'book_id');
+    }
 }

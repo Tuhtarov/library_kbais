@@ -10,7 +10,11 @@
     <tbody>
     @foreach($categories as $category)
         <tr>
-            <th scope="row">{{$category->title}}</th>
+            <th scope="row">
+                <a class="text-decoration-none link-dark" href="{{route('search.books.category.slug', ['slug' => $category->slug])}}">
+                    {{$category->title}}
+                </a>
+            </th>
             <td>{{$category->slug}}</td>
             <td>
                 <form id="formDelete" class="d-inline" action="{{route('categories.destroy', [$category->id])}}" method="post">
