@@ -37,4 +37,9 @@ class Book extends Model
         return $this->belongsToMany(Tags::class, 'book_tag_enrollments', 'book_id', 'tag_id');
     }
 
+    public function reader()
+    {
+        return $this->belongsTo(Reader::class);
+    }
+
 }

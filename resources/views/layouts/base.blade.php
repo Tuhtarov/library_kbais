@@ -24,8 +24,8 @@
         {{-- TODO определиться с hr тегом <hr class="bi-hr mt-2 mb-2">--}}
     </main>
 
-    <footer class="footer container-fluid ps-5 pe-5">
-        <div class="row mx-auto col-md-12">
+    <footer class="container-fluid">
+        <div class="row col-md-12">
             @section('footer')
 
             @show

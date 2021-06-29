@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Book;
 use App\Models\Journal;
-use App\Models\Reader;
 use Illuminate\Http\Request;
 
 class JournalController extends Controller
@@ -18,64 +16,55 @@ class JournalController extends Controller
      */
     public function add(Request $request)
     {
-        Journal::create($request->reader);
-        return redirect()->route('main');
-    }
+        //проверка правильности выбранной даты
+        $whenReturn = strtotime($request->record['when_return']);
+        $currentTime = strtotime(date('d-m-Y'));
+        if($whenReturn < $currentTime) {
+            return back()->with('errors', ['Ошибка в выбранной дате' => 'Прошлое - не вернуть :(']);
+        }
 
-    /**
-     * Редактирует запись из журнала.
-     *
-     * @param \Illuminate\Http\Request $request
-     */
-    public function edit(int $record_id)
-    {
-        $record = Journal::findOrFail($record_id);
-        $readers = Reader::all();
-        $books = Book::all();
-        return view('admin.main.journal.edit', [
-            'record' => $record,
-            'readers' => $readers,
-            'books' => $books
-        ]);
-    }
-
-    /**
-     * Обновляет запись из журнала.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, int $record_id)
-    {
-        $record = Journal::find($record_id);
-        $record->update($request->reader);
-        return redirect()->route('main');
-    }
-
-    /**
-     * Удаляет запись из журнала.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(int $record_id)
-    {
-        $record = Journal::findOrFail($record_id);
-        $record->delete();
-        return redirect()->route('main');
+        //проверка книги на её доступность (защита от скамера)
+        $isRead = Journal::where('book_id', '=', $request->record['book_id'])
+            ->where('returned', '=', false)
+            ->get();
+        if(count($isRead->all())) {
+            return back()->with('errors', ['Ошибка в доступе' => 'Данную книгу уже читают!']);
+        } else {
+            return $this->addRecord($request);
+        }
     }
 
     /**
      * Метод принимает объект модели Journal, обновляет его св-во returned на true.
-     *
+     * Попутно обновляет статус книги.
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function confirmReturnBook(Journal $record)
     {
+        $record->book()->update([
+            'reader_id' => null
+        ]);
         $record->returned=true;
         $record->save();
-        return redirect()->route('main');
+        return back();
     }
 
+    /**
+     * Добавление записи в журнал чтения, с обновлением статуса книги.
+     */
+    private function addRecord(Request &$request) {
+        try {
+            $record = Journal::create($request->record)->with(['book', 'reader'])
+                ->where('book_id', '=', $request->record['book_id'])
+                ->where('reader_id', '=', $request->record['reader_id'])
+                ->get()->first();
+            $record->book->update([
+                'reader_id' => $request->record['reader_id']
+            ]);
+            return redirect()->route('main')->with('success', "Запись '{$record->reader->getFullName()} - {$record->book->title}' успешно добавлена в журнал чтения!");
+        } catch (\Exception $e) {
+            return redirect()->route('main')->with('errors', ['Exception' => "{$e->getMessage()}"]);
+        }
+    }
 }

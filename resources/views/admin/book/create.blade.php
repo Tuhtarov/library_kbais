@@ -6,7 +6,7 @@
 
 @section('content')
     <!--Форма добавления книги-->
-    <main class="container-fluid pe-5">
+    <main class="container-fluid  pe-5">
         <div class="row">
             <div class="col-md-4 float-start">
                 <img class="img-fluid border border-secondary border-3" src="http://via.placeholder.com/400x600"
@@ -38,34 +38,34 @@
                         <input required type="number" placeholder="30-2500" class="form-control" min="30" max="2500"
                                id="pages" name="book[pages]">
                     </div>
-                        {{--Полка--}}
-                        <div class="mb-3 col-md-6">
-                            <label for="shelves" class="form-label">
-                                <a class="text-decoration-none link-success" href="{{route('shelves.create')}}"
-                                   data-tooltip="Добавить полку">Полка</a>
-                            </label>
-                            <select required oninput="this" name="book[shelve_id]" id="shelves" class="form-select"
-                                    aria-label="Shelves">
-                                @foreach($shelves as $shelve)
-                                    <option value="{{$shelve->id}}">{{$shelve->title}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        {{--Категория--}}
-                        <div class="mb-3 col-md-6">
-                            <label for="category" class="form-label">
-                                <a class="text-decoration-none link-success" href="{{route('categories.create')}}"
-                                   data-tooltip="Создать категорию">
-                                    Категория
-                                </a>
-                            </label>
-                            <select required oninput="this" name="book[category_id]" class="form-select"
-                                    aria-label="Categories">
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->title}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    {{--Полка--}}
+                    <div class="mb-3 col-md-6">
+                        <label for="shelves" class="form-label">
+                            <a class="text-decoration-none link-success" href="{{route('shelves.create')}}"
+                               data-tooltip="Добавить полку">Полка</a>
+                        </label>
+                        <select required oninput="this" name="book[shelve_id]" id="shelves" class="form-select"
+                                aria-label="Shelves">
+                            @foreach($shelves as $shelve)
+                                <option value="{{$shelve->id}}">{{$shelve->title}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{--Категория--}}
+                    <div class="mb-3 col-md-6">
+                        <label for="category" class="form-label">
+                            <a class="text-decoration-none link-success" href="{{route('categories.create')}}"
+                               data-tooltip="Создать категорию">
+                                Категория
+                            </a>
+                        </label>
+                        <select required oninput="this" name="book[category_id]" class="form-select"
+                                aria-label="Categories">
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->title}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
                 {{--Теги--}}
@@ -93,5 +93,9 @@
             </div>
         </div>
     </main>
+@endsection
+
+@section('footer')
+    @include('layouts.components.admin.form.book.simple_create_tag')
 @endsection
 

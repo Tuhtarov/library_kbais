@@ -10,7 +10,7 @@
                 <div class="col-md-6  d-grid gap-1">
                     {{--Выбор читателя--}}
                     <label class="form-text mb-1" for="reader">Читатель</label>
-                    <select required id="reader" oninput="this" name="reader[reader_id]" class="form-select">
+                    <select required id="reader" oninput="this" name="record[reader_id]" class="form-control select2">
                         @foreach($readers as $reader)
                             <option
                                 value="{{$reader->id}}">
@@ -21,8 +21,8 @@
                         @endforeach
                     </select>
                     {{--Выбор книги--}}
-                    <label class="form-text mb-1" for="added_at">Книга</label>
-                    <select required id="reader" oninput="this" name="reader[book_id]" class="form-select">
+                    <label class="form-text mb-1" for="book">Книга</label>
+                    <select required id="book" oninput="this" name="record[book_id]" class="form-control select2">
                         @foreach($books as $book)
                             <option
                                 value="{{$book->id}}">
@@ -36,11 +36,11 @@
                 <div class="col-md-6 d-grid gap-1">
                     {{--Дата начала чтения--}}
                     <label class="form-text mb-1" for="added_at">Дата начала чтения книги</label>
-                    <input class="form-control" type="text" name="reader[added_at]" value="{{date('Y-m-d H:i:s')}}"
+                    <input class="form-control" type="text" name="record[added_at]" value="{{date('Y-m-d H:i:s')}}"
                            id="added_at" readonly>
                     {{--Дата окончания чтения--}}
                     <label class="form-text mb-1" for="when_return">Дата возврата книги</label>
-                    <input class="form-control" type="date" name="reader[when_return]"
+                    <input class="form-control" type="date" name="record[when_return]"
                            id="when_return" required>
                 </div>
             </div>

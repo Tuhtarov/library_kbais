@@ -102,3 +102,7 @@
         </div>
     </main>
 @endsection
+
+@section('footer')
+    @include('layouts.components.admin.form.book.simple_create_tag')
+@endsection

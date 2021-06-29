@@ -36,10 +36,15 @@
                                 {{'отсутствует'}}
                             @endif
                         </p>
-                        @if($book->reader === null)
+                        @if($book->reader_id == null)
                         <p class="fs-5 list-group-item-action bg-transparent border-0 text-success">Книга доступна</p>
                         @else
-                            <p class="fs-5 list-group-item-action bg-transparent border-0">Читатель книги: {{$book->reader}}</p>
+                            <p class="fs-5 list-group-item-action bg-transparent border-0">Читатель книги:
+                                <a class="text-decoration-none link-info"
+                                   href="{{route('readers.show', ['reader' => $book->reader->id])}}">
+                                    {{$book->reader->getFullName()}}
+                                </a>
+                            </p>
                         @endif
                         <p class="list-group-item-action bg-transparent border-0"><small
                                 class="text-muted">Добавлена: {{$book->created_at}}</small></p>

@@ -24,14 +24,6 @@ Route::prefix('search')->name('search.')->group(function () {
 Route::name('journal.')->prefix('journal')->group(function () {
     Route::post('/add', [JournalController::class, 'add'])
         ->name('add');
-    Route::get('/{record}/edit', [JournalController::class, 'edit'])
-        ->name('edit')
-        ->whereNumber('record');
-    Route::post('/update/{record}', [JournalController::class, 'update'])
-        ->name('update')
-        ->whereNumber('record');
-    Route::post('/destroy/{record}', [JournalController::class, 'destroy'])
-        ->name('destroy')->whereNumber('record');
     Route::post('/confirm/return/{record}', [JournalController::class, 'confirmReturnBook'])
         ->name('confirm.return')->whereNumber('record');
 });

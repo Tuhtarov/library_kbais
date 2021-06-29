@@ -10,13 +10,13 @@
             </ul>
         </div>
     @endif
-    @if($errors->count() > 0)
+    @if(count($errors))
         <div class="alert alert-danger">
             <ul class="list-unstyled">
-                @foreach($errors->all() as $error)
+                @foreach($errors as $error)
                 <li>
                     <p class="fs-5">
-                        {{ $error }} <i class="fas fa-check-circle fs-5"></i>
+                        {{ $error }}
                     </p>
                 </li>
                 @endforeach

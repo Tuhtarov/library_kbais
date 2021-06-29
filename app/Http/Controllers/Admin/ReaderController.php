@@ -87,6 +87,6 @@ class ReaderController extends Controller
     {
         $reader = Reader::findOrFail($id);
         $reader->delete();
-        return redirect()->route('readers.index');
+        return back();
     }
 }

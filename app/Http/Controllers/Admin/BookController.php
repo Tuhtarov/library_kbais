@@ -56,7 +56,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::with('tags')->where('id', '=', $id)->get()->first();
+        $book = Book::findOrFail($id)->with(['reader', 'tags'])->where('id', '=', $id)->get()->first();
         return view('admin.book.show', compact('book'));
     }
 
@@ -100,6 +100,6 @@ class BookController extends Controller
     {
         $book = Book::findOrFail($id);
         $book->delete();
-        return redirect()->route('books.index')->with('success', "Книга '{$book->title}'" . ' успешно удалена!' );
+        return back();
     }
 }

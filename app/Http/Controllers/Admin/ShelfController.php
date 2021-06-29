@@ -92,6 +92,6 @@ class ShelfController extends Controller
     {
         $shelve = Shelves::findOrFail($id);
         $shelve->delete();
-        return redirect()->route('shelves.index');
+        return back();
     }
 }

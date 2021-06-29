@@ -38,8 +38,11 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        Tags::create($request->tag);
-        return redirect()->route('tags.index');
+        $tag = Tags::create($request->tag);
+        if ($tag) {
+            return back()->withInput()->with('success', "Тег '{$tag->title}' успешно создан!");
+        }
+        return back()->withInput()->with('errors', ['failed' => 'Ошибка создания тега.']);
     }
 
     /**
@@ -81,6 +84,6 @@ class TagController extends Controller
     {
         $tag = Tags::findOrFail($id);
         $tag->delete();
-        return redirect()->route('tags.index');
+        return back();
     }
 }

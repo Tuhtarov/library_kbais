@@ -53,21 +53,6 @@
                                     </div>
                                 </form>
                             @endif
-                            {{--TODO здесь действия для админа--}}
-                            {{--                        --}}{{--Кнопка отредактировать--}}
-                            {{--                        <div class="nav-item">--}}
-                            {{--                        </div>--}}
-                            {{--                        <form class="d-inline" action="{{route('journal.edit', ['record' => $record->id])}}"--}}
-                            {{--                              method="get">--}}
-                            {{--                            @csrf--}}
-                            {{--                            <button type="submit" class="btn btn-outline-success">редактировать</button>--}}
-                            {{--                        </form>--}}
-                            {{--                        --}}{{--Кнопка удалить--}}
-                            {{--                        <form class="d-inline" action="{{route('journal.destroy', ['record' => $record->id])}}"--}}
-                            {{--                              method="post">--}}
-                            {{--                            @csrf--}}
-                            {{--                            <button type="submit" class="btn btn-outline-danger">удалить</button>--}}
-                            {{--                        </form>--}}
                         </td>
                     </tr>
                 @endforeach
