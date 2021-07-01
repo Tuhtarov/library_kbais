@@ -10,17 +10,14 @@
             </ul>
         </div>
     @endif
-    @if(count($errors))
-        <div class="alert alert-danger">
-            <ul class="list-unstyled">
-                @foreach($errors as $error)
-                <li>
-                    <p class="fs-5">
-                        {{ $error }}
-                    </p>
-                </li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <h6>Ошибочное заполнение формы.</h6>
+                <ul class="list-unstyled">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 </div>

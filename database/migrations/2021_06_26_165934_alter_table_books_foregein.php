@@ -28,11 +28,6 @@ class AlterTableBooksForegein extends Migration
                 ->references('id')
                 ->on('readers')
                 ->onDelete('set null');
-
-            $table->foreign('image_book_id')
-                ->references('id')
-                ->on('images')
-                ->onDelete('set null');
         });
     }
 
@@ -44,7 +39,9 @@ class AlterTableBooksForegein extends Migration
     public function down()
     {
         Schema::table('books', function (Blueprint $table) {
-            //
+            $table->dropForeign(['category_id']);
+            $table->dropForeign(['shelve_id']);
+            $table->dropForeign(['reader_id']);
         });
     }
 }

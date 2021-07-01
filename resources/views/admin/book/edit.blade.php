@@ -9,10 +9,11 @@
     <main class="container-fluid pe-5">
         <div class="row">
             <div class="col-md-4 float-start">
-                <img class="img-fluid border border-secondary border-3" src="http://via.placeholder.com/400x600"
+                <img class="img-fluid border border-secondary border-3"
+                     src="{{$book->image != null ? asset('public/storage/' . $book->image) : 'https://www.fillmurray.com/400/600'}}"
                      alt="Обложка">
             </div>
-            <form class="mx-auto container col-md-5 mt-sm-4 mt-3 mt-md-0" method="post"
+            <form class="mx-auto container col-md-5 mt-sm-4 mt-3 mt-md-0" method="post" enctype="multipart/form-data"
                   action="{{route('books.update',['book' => $book->id])}}">
                 @csrf
                 @method('PUT')
@@ -92,7 +93,7 @@
 
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Фотография обложки книги (необязательно)</label>
-                    <input class="form-control" type="file" id="photo" name="book[photo]">
+                    <input class="form-control" type="file" id="photo" name="book[image]">
                 </div>
                 <button class="btn btn-primary mt-2" type="submit">Сохранить</button>
             </form>

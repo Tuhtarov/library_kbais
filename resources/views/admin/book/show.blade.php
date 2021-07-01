@@ -7,7 +7,8 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-5 float-start">
-                    <img class="img-fluid border border-secondary border-3" src="https://www.fillmurray.com/400/600"
+                    <img class="img-fluid border border-secondary border-3" style="max-width: 400px; max-height: 600px"
+                         src="{{$book->image != null ? asset('public/storage/' . $book->image) : 'https://www.fillmurray.com/400/600'}}"
                          alt="Обложка">
                 </div>
                 <div class="col-md-6 mt-sm-4 mt-3 mt-md-0">

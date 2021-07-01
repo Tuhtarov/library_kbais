@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Shelves;
 use App\Models\Tags;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
@@ -43,8 +44,22 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'book.image' => 'nullable|image',
+        ], $this->getCustomErrorMessages());
+        $validator->validate();
+
         $book = Book::create($request->book);
         $book->tags()->sync($request->tags);
+
+        //работа с обложкой книги, загрузка в базу
+        if ($request->hasFile('book.image')) {
+            $patchDate = date('Y-m');
+            $uploadedImage = $request->file('book.image')->store("images/{$patchDate}");
+            $book->update(['image' => $uploadedImage ?? null]);
+        }
+        $book->save();
+
         return redirect()->route('books.index')->with('success', 'Книга успешно создана');
     }
 
@@ -84,9 +99,23 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'book.image' => 'nullable|image',
+        ], $this->getCustomErrorMessages());
+        $validator->validate();
+
         $book = Book::findOrFail($id);
         $book->tags()->sync($request->tags);
         $book->update($request->book);
+
+        //работа с обложкой книги, загрузка в базу
+        if ($request->hasFile('book.image')) {
+            $patchDate = date('Y-m');
+            $uploadedImage = $request->file('book.image')->store("images/{$patchDate}");
+            $book->update(['image' => $uploadedImage ?? null]);
+        }
+        $book->save();
+
         return redirect()->route('books.index');
     }
 
@@ -101,5 +130,12 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
         return back();
+    }
+
+    public function getCustomErrorMessages() : array
+    {
+        return [
+            'image' => 'Загружаемый файл должен быть фотографией!'
+        ];
     }
 }

@@ -22,7 +22,8 @@
             <main class="card-img-top text-center position-relative">
                 <div class="img-fluid">
                     <a href="{{route('books.show', ['book' => $book->id])}}">
-                        <img src="https://www.fillmurray.com/400/600" alt="book"
+                        <img alt="book"
+                             src="{{$book->image != null ? asset('public/storage/' . $book->image) : 'https://www.fillmurray.com/400/600'}}"
                              style="max-width: 200px; max-height: 120px">
                     </a>
                     @if($book->reader_id)

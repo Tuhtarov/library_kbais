@@ -34,7 +34,8 @@ class AlterTableBooksTagForegein extends Migration
     public function down()
     {
         Schema::table('book_tag_enrollments', function (Blueprint $table) {
-            //
+            $table->dropForeign(['book_id']);
+            $table->dropForeign(['tag_id']);
         });
     }
 }

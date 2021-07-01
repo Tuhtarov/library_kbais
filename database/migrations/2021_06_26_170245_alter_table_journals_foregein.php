@@ -34,7 +34,8 @@ class AlterTableJournalsForegein extends Migration
     public function down()
     {
         Schema::table('journals', function (Blueprint $table) {
-            //
+            $table->dropForeign(['reader_id']);
+            $table->dropForeign(['book_id']);
         });
     }
 }

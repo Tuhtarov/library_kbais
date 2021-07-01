@@ -21,8 +21,8 @@ class CreateBooksTable extends Migration
             $table->unsignedInteger('category_id')->nullable();
             $table->unsignedInteger('shelve_id')->nullable();
             $table->smallInteger('pages');
-            $table->unsignedInteger('image_book_id')->nullable();
             $table->unsignedInteger('reader_id')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

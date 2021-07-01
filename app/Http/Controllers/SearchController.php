@@ -57,6 +57,7 @@ class SearchController extends Controller
         $result = Shelves::with('books')->where('slug', '=', $slug)->get()->first();
         if ($result) {
             $books = new Paginator($result->books, 15);
+//            $books = $result->books()->paginate(15);
             $search = $result->title;
             $typeSearch = 'полке';
             return view('search.book.result', compact('books', 'search', 'typeSearch'));
